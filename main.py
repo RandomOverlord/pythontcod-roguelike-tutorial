@@ -11,7 +11,7 @@ def main() -> None:
 
     # Telling tcod what tileset to use
     tileset = tcod.tileset.load_tilesheet(
-        "Assets\\dejavu10x10_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
+        "assets\\dejavu10x10_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
     )
 
     event_handler = EventHandler()
