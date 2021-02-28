@@ -22,3 +22,14 @@ class Engine:
             
             if isinstance(action, MovementAction):
                 self.player.move(dx=action.dx, dy=action.dy)
+
+            elif isinstance(action, EscapeAction):
+                raise SystemExit()
+
+    def render(self, console: Console, context: Context) -> None:
+        for entity in self.entities:
+            console.print(entity.x, entity.y, entity.char, fg=entity.color)
+
+        context.present(console)
+
+        console.clear()
