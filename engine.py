@@ -17,10 +17,10 @@ class Engine:
     def handle_events(self, events: Iterable[Any]):
         for event in events:
             action = self.event_handler.dispatch(event)
-
+            
             if action is None:
                 continue
-            
+
             action.perform(self, self.player)
 
     def render(self, console: Console, context: Context) -> None:
