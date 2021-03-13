@@ -48,7 +48,6 @@ def tunnel_between(start: Tuple[int, int], end: Tuple[int, int]) -> Iterator[Tup
         corner_x, corner_y = x2, y1
     else:
         corner_x, corner_y = x1, y2
-
     for x, y in tcod.los.bresenham((x1, y1), (corner_x, corner_y)).tolist():
         yield x, y
     for x, y in tcod.los.bresenham((corner_x, corner_y), (x2, y2)).tolist():
