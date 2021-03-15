@@ -10,18 +10,19 @@ from input_handlers import EventHandler
 
 if TYPE_CHECKING:
     from game_map import GameMap
-    from entity import Entity
+    from entity import Actor
 
 class Engine:
     game_map: GameMap
 
-    def __init__(self, player: Entity):
+    def __init__(self, player: Actor):
         self.event_handler: EventHandler = EventHandler(self)
         self.player = player
     
     def handle_enemy_turns(self) -> None:
-        for entity in self.game_map.entities - {self.player}:
-            print(f"Unimplemented turn action for {entity.name}")
+        for entity in set(self.game_map.actors) - {self.player}:
+            if entity.ai:
+                entity.ai.perform()
 
     def update_fov(self) -> None:
         self.game_map.visible[:] = compute_fov(
@@ -33,5 +34,11 @@ class Engine:
 
     def render(self, console: Console, context: Context) -> None:
         self.game_map.render(console)
+        console.print(
+            x=1,
+            y=47,
+            string=f"HP: {self.player.fighter.hp}/{self.player.fighter.max_hp}",
+        )
+
         context.present(console)
         console.clear()
